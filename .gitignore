@@ -38,3 +38,11 @@ welding-qc-backend/.env
 node_modules/
 dist/
 .env
+
+# User uploaded files
+welding-qc-backend/uploads/*
+!welding-qc-backend/uploads/.gitkeep
+
+# Database files
+*.sqlite
+*.db

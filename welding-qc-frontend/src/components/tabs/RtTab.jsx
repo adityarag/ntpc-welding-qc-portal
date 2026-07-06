@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import ConfirmationModal from '../common/ConfirmationModel';
 import api from '../../api/axiosConfig';
 import DateFilter from '../common/DateFilter';
-
+import { downloadSecureFile } from '../../utils/downloadFile';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
 export default function RtTab() {
@@ -365,9 +365,9 @@ export default function RtTab() {
                     <td className="px-6 py-4">
                       {row.report_file ? (
                         <div className="flex items-center space-x-2 bg-emerald-50 border border-emerald-200 rounded-lg p-1.5 max-w-max">
-                          <a href={`${BACKEND_URL}${row.report_file}`} target="_blank" rel="noreferrer" className="text-xs font-semibold text-emerald-700 hover:underline">
+                          <button onClick={() => downloadSecureFile(row.report_file)} className="text-xs font-semibold text-emerald-700 hover:underline">
                             📄 View PDF
-                          </a>
+                          </button>
                         </div>
                       ) : row.isUploading ? (
                         <div className="flex items-center space-x-2 text-xs font-medium text-blue-600">

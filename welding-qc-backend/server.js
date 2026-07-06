@@ -19,6 +19,7 @@ const areaSystemRoutes = require('./routes/areaSystemRoutes');
 const reportRoutes = require('./routes/reportRoutes');
 
 const uploadRoutes = require('./routes/uploadRoutes');
+const fileRoutes = require('./routes/fileRoutes');
 const path = require('path');
 
 const app = express();
@@ -27,7 +28,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const http = require('http');
 const { Server } = require('socket.io');
@@ -64,6 +64,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/supervisors', supervisorRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/files', fileRoutes);
 app.use('/api/area-systems', areaSystemRoutes);
 app.use('/api/reports', reportRoutes);
 

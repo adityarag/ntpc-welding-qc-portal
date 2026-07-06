@@ -5,7 +5,7 @@ import api from '../../api/axiosConfig';
 export default function LoginForm() {
   const { handleLoginSuccess } = useApp();
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('password123'); // Default for quick testing
+  const [password, setPassword] = useState(''); // Default for quick testing
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
