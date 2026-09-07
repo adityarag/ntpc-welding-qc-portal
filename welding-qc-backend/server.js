@@ -83,9 +83,23 @@ sequelize.sync({ alter: false })
   .then(async () => {
     console.log('Database schema validated.');
     
-    // Auto-backfill RT, PWHT, PAUT, MPI, and Area Systems for existing joints
+    // Auto-backfill Users and existing joints
     try {
-      const { Joint, RtAttempt, WeldPwht, NdtRecord, AreaSystem } = require('./models');
+      const { Joint, RtAttempt, WeldPwht, NdtRecord, AreaSystem, User } = require('./models');
+      const bcrypt = require('bcryptjs');
+      
+      // Seed default users if none exist
+      const userCount = await User.count();
+      if (userCount === 0) {
+        const password_hash = bcrypt.hashSync('password123', 8);
+        await User.bulkCreate([
+          { username: 'admin', password_hash, role: 3 },
+          { username: 'verifier', password_hash, role: 2 },
+          { username: 'supervisor', password_hash, role: 1 }
+        ]);
+        console.log('[Seed] Created default admin, verifier, and supervisor users.');
+      }
+
       const allJoints = await Joint.findAll();
       let backfilledCount = 0;
       let pwhtAdded = 0;
