@@ -38,7 +38,7 @@ api.interceptors.response.use(
       } else if (status === 403) {
         customError.message = 'You do not have permission to perform this action.';
       } else if (status === 404) {
-        customError.message = 'The requested resource could not be found.';
+        customError.message = serverMessage || 'The requested resource could not be found.';
       } else if (status === 400) {
         customError.message = serverMessage || 'Invalid request. Please check your inputs.';
       } else if (status >= 500) {

@@ -6,7 +6,7 @@ exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const user = await User.findOne({ where: { username } });
+    const user = await User.findOne({ where: { username: username.toUpperCase() } });
 
     if (!user) {
       return res.status(404).json({ message: 'User Not found.' });

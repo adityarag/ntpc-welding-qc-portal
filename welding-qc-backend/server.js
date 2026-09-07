@@ -68,6 +68,14 @@ app.use('/api/files', fileRoutes);
 app.use('/api/area-systems', areaSystemRoutes);
 app.use('/api/reports', reportRoutes);
 
+// Serve static frontend files
+app.use(express.static(path.join(__dirname, '../welding-qc-frontend/dist')));
+
+// Catch-all route to serve React app for non-API requests
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../welding-qc-frontend/dist', 'index.html'));
+});
+
 // Database Sync and Server Start
 const PORT = process.env.PORT || 5000;
 
